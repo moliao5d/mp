@@ -9,18 +9,11 @@ import org.bson.Document;
 /**
  * Created on 2017/4/23.
  */
-public class OfficeAccountDAOImpl extends BaseDAO implements IOfficeAccountDAO {
+public class OfficeAccountDAO extends BaseDAO implements IOfficeAccountDAO {
 
-    @Override
-    protected MongoCollection<Document> getColl() {
+    public MongoCollection<Document> getColl() {
         return DBUtil.getColl("gh");
     }
-
-
-//    public void save(OfficeAccount officeAccount) {
-//
-//    }
-
 
 
 }

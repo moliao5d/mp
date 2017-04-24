@@ -2,13 +2,14 @@ package com.jichong.domain;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.bson.Document;
+import lombok.ToString;
 
 /**
  * Created on 2017/4/23.
  */
 @Getter
 @Setter
+@ToString
 public class OfficeAccount extends BaseDomain{
 
     private String original_id;
@@ -19,10 +20,4 @@ public class OfficeAccount extends BaseDomain{
     private int status;
 
 
-    @Override
-    public Document toMongoDoc() {
-        Document doc=new Document();
-        doc.append("_id",_id);
-        return doc;
-    }
 }

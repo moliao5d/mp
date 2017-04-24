@@ -18,6 +18,8 @@ public class Constants {
     public static String MongoUser="";
     public static String MongoPassword="";
 
+    private Constants(){}
+
     static {
         Properties p=new Properties();
         InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream("conf.properties");

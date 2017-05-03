@@ -1,6 +1,7 @@
-package com.jichong.dao;
+package com.jichong.dao.impl;
 
-import com.jichong.domain.BaseDomain;
+import com.jichong.dao.IBaseDAO;
+import com.jichong.entity.BaseDomain;
 import com.jichong.util.Page;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
@@ -14,7 +15,7 @@ import java.util.List;
 /**
  * Created on 2017/4/23.
  */
-public abstract class BaseDAO implements IBaseDAO{
+public abstract class BaseDAOImpl implements IBaseDAO {
 
     public abstract MongoCollection<Document> getColl();
 

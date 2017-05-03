@@ -1,6 +1,6 @@
 package com.jichong.dao;
 
-import com.jichong.domain.BaseDomain;
+import com.jichong.entity.BaseDomain;
 import com.jichong.util.Page;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;

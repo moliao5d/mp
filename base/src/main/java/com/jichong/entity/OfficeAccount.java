@@ -1,4 +1,4 @@
-package com.jichong.domain;
+package com.jichong.entity;
 
 import lombok.Getter;
 import lombok.Setter;

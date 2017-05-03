@@ -1,18 +1,20 @@
 package com.jichong.handler;
 
-import java.util.Map;
-
-import org.springframework.stereotype.Component;
-
 import com.jichong.builder.TextBuilder;
+import com.jichong.dao.IWXUserDAO;
+import com.jichong.entity.WXUser;
 import com.jichong.service.WeixinService;
-
 import me.chanjar.weixin.common.exception.WxErrorException;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.Map;
 
 /**
  * 
@@ -21,6 +23,8 @@ import me.chanjar.weixin.mp.bean.result.WxMpUser;
  */
 @Component
 public class SubscribeHandler extends AbstractHandler {
+    @Autowired
+    private IWXUserDAO wxUserDAO;
 
   @Override
   public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context, WxMpService wxMpService,
@@ -34,7 +38,10 @@ public class SubscribeHandler extends AbstractHandler {
     WxMpUser userWxInfo = weixinService.getUserService().userInfo(wxMessage.getFromUser(), null);
 
     if (userWxInfo != null) {
-      // TODO 可以添加关注用户到本地
+      // TO DO 可以添加关注用户到本地
+        WXUser wxUser = new WXUser();
+        BeanUtils.copyProperties(userWxInfo,wxUser);
+        wxUserDAO.save(wxUser);
     }
 
     WxMpXmlOutMessage responseResult = null;

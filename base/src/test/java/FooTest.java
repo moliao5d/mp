@@ -1,11 +1,12 @@
 import com.jichong.dao.IOfficeAccountDAO;
-import com.jichong.dao.impl.OfficeAccountDAO;
-import com.jichong.domain.OfficeAccount;
+import com.jichong.dao.impl.OfficeAccountDAOImpl;
+import com.jichong.entity.OfficeAccount;
 import com.jichong.util.Constants;
 import com.jichong.util.Page;
 import com.mongodb.client.model.Filters;
 import org.bson.Document;
 import org.junit.Test;
+
 
 /**
  * Created on 2017/4/23.
@@ -32,7 +33,7 @@ public class FooTest {
         oa.setOriginal_id("ghgh");
         oa.setStatus(2);
         oa.setToken("token");
-        OfficeAccountDAO dao=new OfficeAccountDAO();
+        IOfficeAccountDAO dao=new OfficeAccountDAOImpl();
         String save = dao.save(oa);
         System.out.println(save);
 
@@ -74,7 +75,7 @@ public class FooTest {
 
     @Test
     public void testgetPage() throws Exception {
-        IOfficeAccountDAO dao = new OfficeAccountDAO();
+        IOfficeAccountDAO dao = new OfficeAccountDAOImpl();
         Page page = dao.getPage(Filters.exists("_id"), 1, 10);
         System.out.println(page.getListData());
 
@@ -82,7 +83,7 @@ public class FooTest {
 
     @Test
     public void testdel() throws Exception {
-        IOfficeAccountDAO dao = new OfficeAccountDAO();
+        IOfficeAccountDAO dao = new OfficeAccountDAOImpl();
         OfficeAccount a = new OfficeAccount();
         a.setAesKey("xxx222");
         a.setOriginal_id("ooooooooooo");

@@ -9,6 +9,8 @@ import com.google.zxing.common.BitMatrix;
 import com.jichong.config.WxMpConfig;
 import com.jichong.service.WeixinService;
 import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +30,8 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/entry")
 public class IndexController {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 
     private Map<String,String> map=new HashMap<>();
     @Autowired
@@ -37,22 +41,17 @@ public class IndexController {
     WeixinService weixinService;
     @RequestMapping("/login")
     public void auth(HttpServletRequest req, HttpServletResponse resp)throws Exception{
-        // qrcode
+        logger.info("=================login=-==============");
 
         String r_url= URLEncoder.encode("http://wx.jichong.space/entry/auth?flag="+ UUID.randomUUID().toString().substring(0,6));
-
         String url="https://open.weixin.qq.com/connect/oauth2/authorize?appid="+ wxMpConfig.getAppid()+"&redirect_uri="+r_url+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
-
-
-        String text = url;
+        String content = url;
         int width = 200;
         int height = 200;
         String format = "png";
         Hashtable hints= new Hashtable();
         hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
-        BitMatrix bitMatrix = new MultiFormatWriter().encode(text, BarcodeFormat.QR_CODE, width, height,hints);
-//        File outputFile = new File("new.png");
-//        MatrixToImageWriter.writeToFile(bitMatrix, format, outputFile);
+        BitMatrix bitMatrix = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, width, height,hints);
         MatrixToImageWriter.writeToStream(bitMatrix,format,resp.getOutputStream());
 
     }
@@ -62,8 +61,11 @@ public class IndexController {
         // qrcode
         String code=req.getParameter("code");
         String flag=req.getParameter("flag");
+        logger.info("===============code="+code);
+        logger.info("===============flag="+flag);
         WxMpOAuth2AccessToken wxMpOAuth2AccessToken = weixinService.oauth2getAccessToken(code);
         String openId = wxMpOAuth2AccessToken.getOpenId();
+        logger.info("openid====="+openId);
         session.setAttribute("flag",flag);
         session.setAttribute("openid",openId);
        req.getRequestDispatcher("/WEB-INF/jsp/ensure.jsp");

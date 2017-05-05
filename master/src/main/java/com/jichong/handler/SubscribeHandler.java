@@ -14,6 +14,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -41,6 +42,7 @@ public class SubscribeHandler extends AbstractHandler {
       // TO DO 可以添加关注用户到本地
         WXUser wxUser = new WXUser();
         BeanUtils.copyProperties(userWxInfo,wxUser);
+        wxUser.setTagIds(Arrays.asList(userWxInfo.getTagIds()));
         wxUserDAO.save(wxUser);
     }
 

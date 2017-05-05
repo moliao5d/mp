@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.net.URLEncoder;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Map;
 import java.util.UUID;
 
@@ -49,7 +48,7 @@ public class IndexController {
         int width = 200;
         int height = 200;
         String format = "png";
-        Hashtable hints= new Hashtable();
+        HashMap hints= new HashMap();
         hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
         BitMatrix bitMatrix = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, width, height,hints);
         MatrixToImageWriter.writeToStream(bitMatrix,format,resp.getOutputStream());

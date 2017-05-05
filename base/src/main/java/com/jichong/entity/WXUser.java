@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 /**
  * Created by xl on 2017/5/3.
  *
@@ -48,6 +50,6 @@ public class WXUser extends BaseDomain{
     private Integer sexId;
     private String remark;
     private Integer groupId;
-    private Long[] tagIds;
+    private List<Long> tagIds;
 
 }

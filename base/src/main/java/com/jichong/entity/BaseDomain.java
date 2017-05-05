@@ -34,9 +34,11 @@ public abstract class BaseDomain {
                 Object value = readMethod.invoke(this);
 
                 if (value != null) {
-                    if (value instanceof String || value instanceof Long || value instanceof Integer || value instanceof Byte || value instanceof Short || value instanceof Double || value instanceof Float || value instanceof Character || value instanceof Boolean || value instanceof Date) {
+                    if (value instanceof String || value instanceof Long || value instanceof Integer || value instanceof Byte || value instanceof Short || value instanceof Double || value instanceof Float || value instanceof Character || value instanceof Boolean || value instanceof Date ) {
                         //支持的数据类型
-                    } else if (value instanceof BaseDomain) {        //value 值还是domain,再转
+                    } else if(value instanceof String[] || value instanceof Long[] || value instanceof Integer[] || value instanceof Double[] || value instanceof Float[]){
+                        value=Arrays.asList(value);
+                    }else if (value instanceof BaseDomain) {        //value 值还是domain,再转
                         value = ((BaseDomain) value).toDoc();
                     } else {
                         value = value.toString();

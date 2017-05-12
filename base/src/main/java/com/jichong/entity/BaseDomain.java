@@ -64,8 +64,8 @@ public abstract class BaseDomain {
             PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
             Set<Map.Entry<String, Object>> entries = doc.entrySet();
             ArrayList<String> propertyNames = new ArrayList<>();
-            Map<String,Method> methodMap = new HashMap();
-            Map<String,Class> typeMap = new HashMap();
+            Map<String,Method> methodMap = new HashMap<>();
+            Map<String,Class> typeMap = new HashMap<>();
             for (PropertyDescriptor pd : pds) {
                 String propertyName = pd.getName();
                 propertyNames.add(propertyName);
